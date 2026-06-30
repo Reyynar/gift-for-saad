@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Gift For SAAD ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="game">
+
+    <div class="backgroundGlow"></div>
+
+    <!-- SCREEN 1 -->
+    <section id="screen1" class="screen">
+
+        <h1>🎁 A Special Gift For You 🎁</h1>
+
+        <p style="margin:20px;">
+            Unlock the gift to see what's inside!
+        </p>
+
+        <div class="giftBox" id="gift">
+
+            <div class="giftLid"></div>
+
+            <div class="giftBase"></div>
+
+            <div class="ribbonVertical"></div>
+
+            <div class="ribbonHorizontal"></div>
+
+            <div class="bow">🎀</div>
+
+        </div>
+
+        <div class="lock">
+            🔒
+        </div>
+
+        <button id="unlockBtn">
+            Unlock Gift 🔑
+        </button>
+
+    </section>
+
+    <!-- SCREEN 2 -->
+    <section id="screen2" class="screen hidden">
+
+        <div class="teddy">
+            🧸
+        </div>
+
+        <h1>Surprise!! ❤️</h1>
+
+        <div class="letter">
+
+            <h2>Dear SAAD,</h2>
+
+            <p>
+
+                I wanted to send you a little surprise.
+
+                I hope today brings you happiness,
+                lots of smiles,
+                and reminds you that you're appreciated.
+
+                Thank you for being an amazing person.
+
+                💖
+
+            </p>
+
+        </div>
+
+        <button id="smileBtn">
+            Continue 😊
+        </button>
+
+    </section>
+
+    <!-- SCREEN 3 -->
+    <section id="screen3" class="screen hidden">
+
+        <h1>Did this make you smile? 😊</h1>
+
+        <div>
+
+            <button id="yesBtn">
+                YES 😄
+            </button>
+
+            <button id="noBtn">
+                NO 😅
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- SCREEN 4 -->
+    <section id="screen4" class="screen hidden">
+
+        <h1 id="answerText"></h1>
+
+        <button id="surpriseBtn">
+            ✨ One More Surprise
+        </button>
+
+    </section>
+
+    <!-- SCREEN 5 -->
+    <section id="screen5" class="screen hidden">
+
+        <h1>🤗 One Last Hug?</h1>
+
+        <button id="hugBtn">
+            Send Hug ❤️
+        </button>
+
+    </section>
+
+    <!-- FINAL SCREEN -->
+    <section id="screen6" class="screen hidden">
+
+        <h1 class="finalTitle">
+            ❤️ Sending the Biggest Virtual Hug ❤️
+        </h1>
+
+        <h2>
+            To
+        </h2>
+
+        <h1 style="font-size:70px;">
+            SAAD
+        </h1>
+
+        <h2>
+            From
+        </h2>
+
+        <h1 style="font-size:60px;">
+            YOUR BOSS 💖
+        </h1>
+
+        <p style="margin-top:30px;font-size:24px;">
+            You deserve all the happiness in the world.
+        </p>
+
+    </section>
+
+    <!-- Effects -->
+
+    <div id="flowers"></div>
+
+    <div id="stars"></div>
+
+    <div id="sparkles"></div>
+
+    <div id="hearts"></div>
+
+    <canvas id="confetti"></canvas>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+/* ===========================
+   GLOBAL
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+    background:linear-gradient(180deg,#ff9ecf,#ffd6ec,#fff7fd);
+    width:100vw;
+    height:100vh;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ===========================
+   MAIN CONTAINER
+=========================== */
+
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+.screen{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* ===========================
+   BACKGROUND
+=========================== */
+
+.backgroundGlow{
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at top,#ffffff66 0%,transparent 45%),
+    radial-gradient(circle at bottom,#ffe2f166 0%,transparent 55%);
+    animation:glow 8s infinite alternate;
+}
+
+@keyframes glow{
+
+0%{
+filter:brightness(1);
+}
+
+100%{
+filter:brightness(1.3);
+}
+
+}
+
+/* ===========================
+   GIFT BOX
+=========================== */
+
+.giftBox{
+    width:230px;
+    height:230px;
+    position:relative;
+    cursor:pointer;
+    transition:.4s;
+    animation:giftBounce 2s infinite;
+}
+
+.giftBox:hover{
+    transform:scale(1.08);
+}
+
+.giftBase{
+    width:230px;
+    height:160px;
+    background:#ff4f8a;
+    border-radius:12px;
+    position:absolute;
+    bottom:0;
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+.giftLid{
+    width:240px;
+    height:60px;
+    background:#ff73a4;
+    position:absolute;
+    left:-5px;
+    top:20px;
+    border-radius:10px;
+    transition:.8s;
+}
+
+.ribbonVertical{
+    position:absolute;
+    width:30px;
+    height:230px;
+    background:white;
+    left:100px;
+}
+
+.ribbonHorizontal{
+    position:absolute;
+    width:230px;
+    height:30px;
+    background:white;
+    top:95px;
+}
+
+.bow{
+    position:absolute;
+    top:-12px;
+    left:82px;
+    font-size:60px;
+}
+
+@keyframes giftBounce{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-18px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* ===========================
+   LOCK
+=========================== */
+
+.lock{
+    margin-top:35px;
+    font-size:40px;
+    animation:shakeLock 2s infinite;
+}
+
+@keyframes shakeLock{
+
+0%,100%{
+transform:rotate(0);
+}
+
+20%{
+transform:rotate(10deg);
+}
+
+40%{
+transform:rotate(-10deg);
+}
+
+60%{
+transform:rotate(8deg);
+}
+
+80%{
+transform:rotate(-8deg);
+}
+
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+button{
+
+padding:15px 35px;
+margin-top:25px;
+border:none;
+border-radius:40px;
+font-size:18px;
+cursor:pointer;
+background:white;
+color:#ff4b91;
+font-weight:bold;
+transition:.3s;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+button:hover{
+
+transform:scale(1.1);
+
+background:#ff4b91;
+color:white;
+
+}
+
+/* ===========================
+   TEDDY
+=========================== */
+
+.teddy{
+
+font-size:180px;
+animation:teddyJump 1.6s infinite;
+
+}
+
+@keyframes teddyJump{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-25px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* ===========================
+   LETTER
+=========================== */
+
+.letter{
+
+width:650px;
+max-width:90%;
+padding:35px;
+background:white;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+
+line-height:1.8;
+
+color:#555;
+
+animation:fadeUp 1s;
+
+}
+
+.letter h2{
+
+margin-bottom:15px;
+color:#ff4f8a;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+/* ===================================
+   FLOWERS
+=================================== */
+
+#flowers{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
+.flower{
+position:absolute;
+font-size:28px;
+animation:flowerFall linear forwards;
+opacity:.95;
+}
+
+@keyframes flowerFall{
+
+0%{
+transform:translateY(-120px) rotate(0deg);
+opacity:0;
+}
+
+15%{
+opacity:1;
+}
+
+100%{
+transform:translateY(120vh) rotate(720deg);
+opacity:0;
+}
+
+}
+
+/* ===================================
+   STARS
+=================================== */
+
+#stars{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
+.star{
+position:absolute;
+color:white;
+font-size:22px;
+text-shadow:
+0 0 8px white,
+0 0 18px white,
+0 0 30px white;
+animation:starFall linear forwards;
+}
+
+@keyframes starFall{
+
+0%{
+transform:translateY(-120px) scale(.3);
+opacity:0;
+}
+
+15%{
+opacity:1;
+}
+
+100%{
+transform:translateY(120vh) scale(1.2);
+opacity:0;
+}
+
+}
+
+/* ===================================
+   SPARKLES
+=================================== */
+
+#sparkles{
+position:absolute;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+}
+
+.sparkle{
+
+position:absolute;
+width:8px;
+height:8px;
+border-radius:50%;
+background:white;
+box-shadow:
+0 0 10px white,
+0 0 20px white,
+0 0 40px white;
+
+animation:sparkleAnim 2.5s linear infinite;
+
+}
+
+@keyframes sparkleAnim{
+
+0%{
+
+transform:scale(0);
+
+opacity:0;
+
+}
+
+50%{
+
+transform:scale(1.5);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(0);
+
+opacity:0;
+
+}
+
+}
+
+/* ===================================
+   HEARTS
+=================================== */
+
+#hearts{
+
+position:absolute;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+
+}
+
+.heart{
+
+position:absolute;
+font-size:32px;
+animation:heartFloat linear forwards;
+
+}
+
+@keyframes heartFloat{
+
+0%{
+
+transform:
+translateY(100vh)
+scale(.5);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+translateY(-120px)
+scale(1.3)
+rotate(360deg);
+
+opacity:0;
+
+}
+
+}
+
+/* ===================================
+   GIFT POP
+=================================== */
+
+.pop{
+
+animation:giftPop .8s forwards;
+
+}
+
+@keyframes giftPop{
+
+0%{
+
+transform:scale(1);
+
+}
+
+20%{
+
+transform:scale(.85);
+
+}
+
+50%{
+
+transform:scale(1.2);
+
+}
+
+70%{
+
+transform:rotate(-10deg);
+
+}
+
+85%{
+
+transform:rotate(10deg);
+
+}
+
+100%{
+
+transform:
+scale(0)
+rotate(20deg);
+
+opacity:0;
+
+}
+
+}
+
+/* ===================================
+   TEDDY POP
+=================================== */
+
+.teddyShow{
+
+animation:teddyShow 1s ease;
+
+}
+
+@keyframes teddyShow{
+
+0%{
+
+transform:
+translateY(200px)
+scale(.2);
+
+opacity:0;
+
+}
+
+60%{
+
+transform:
+translateY(-20px)
+scale(1.1);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+translateY(0)
+scale(1);
+
+}
+
+}
+
+/* ===================================
+   CONFETTI
+=================================== */
+
+#confetti{
+
+position:absolute;
+inset:0;
+pointer-events:none;
+
+}
+
+/* ===================================
+   FINAL SCREEN
+=================================== */
+
+.finalTitle{
+
+font-size:52px;
+color:#ff3d88;
+
+text-shadow:
+
+0 0 10px white,
+0 0 25px #ff8dbd,
+0 0 45px #ff5ea2;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/* ===================================
+   SCREEN TRANSITIONS
+=================================== */
+
+.fadeIn{
+
+animation:fadeScreen 1s;
+
+}
+
+@keyframes fadeScreen{
+
+from{
+
+opacity:0;
+
+transform:scale(.96);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media(max-width:768px){
+
+.giftBox{
+
+width:170px;
+height:170px;
+
+}
+
+.giftBase{
+
+width:170px;
+height:120px;
+
+}
+
+.giftLid{
+
+width:180px;
+height:45px;
+
+}
+
+.ribbonVertical{
+
+left:72px;
+height:170px;
+
+}
+
+.ribbonHorizontal{
+
+width:170px;
+top:70px;
+
+}
+
+.bow{
+
+left:58px;
+font-size:45px;
+
+}
+
+.teddy{
+
+font-size:120px;
+
+}
+
+.letter{
+
+width:92%;
+padding:22px;
+font-size:15px;
+
+}
+
+.finalTitle{
+
+font-size:34px;
+
+}
+
+button{
+
+font-size:16px;
+padding:12px 24px;
+
+}
+
+}
+/* ==========================================
+   GIFT FOR SAAD ❤️
+   script.js - Chunk 1
+========================================== */
+
+const screen1 = document.getElementById("screen1");
+const screen2 = document.getElementById("screen2");
+const screen3 = document.getElementById("screen3");
+const screen4 = document.getElementById("screen4");
+const screen5 = document.getElementById("screen5");
+const screen6 = document.getElementById("screen6");
+
+const gift = document.getElementById("gift");
+
+const unlockBtn = document.getElementById("unlockBtn");
+const smileBtn = document.getElementById("smileBtn");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const surpriseBtn = document.getElementById("surpriseBtn");
+const hugBtn = document.getElementById("hugBtn");
+
+const flowers = document.getElementById("flowers");
+const stars = document.getElementById("stars");
+const sparkles = document.getElementById("sparkles");
+const hearts = document.getElementById("hearts");
+
+const answerText = document.getElementById("answerText");
+
+/* ============================
+   OPEN GIFT
+============================ */
+
+unlockBtn.onclick = function(){
+
+gift.classList.add("pop");
+
+createFlowers();
+createStars();
+createSparkles();
+
+setTimeout(function(){
+
+screen1.classList.add("hidden");
+
+screen2.classList.remove("hidden");
+
+screen2.classList.add("fadeIn");
+
+},900);
+
+}
+
+/* ============================
+   NEXT SCREEN
+============================ */
+
+smileBtn.onclick=function(){
+
+screen2.classList.add("hidden");
+
+screen3.classList.remove("hidden");
+
+screen3.classList.add("fadeIn");
+
+}
+
+/* ============================
+   YES BUTTON
+============================ */
+
+yesBtn.onclick=function(){
+
+screen3.classList.add("hidden");
+
+screen4.classList.remove("hidden");
+
+answerText.innerHTML="😊 I knew it! That makes me happy ❤️";
+
+createSparkles();
+
+}
+
+/* ============================
+   NO BUTTON
+============================ */
+
+noBtn.onclick=function(){
+
+screen3.classList.add("hidden");
+
+screen4.classList.remove("hidden");
+
+answerText.innerHTML="😂 Nice try! I'm still counting that as a smile!";
+
+createSparkles();
+
+}
+
+/* ============================
+   ONE MORE SURPRISE
+============================ */
+
+surpriseBtn.onclick=function(){
+
+screen4.classList.add("hidden");
+
+screen5.classList.remove("hidden");
+
+createFlowers();
+
+createStars();
+
+}
+
+/* ============================
+   SEND HUG
+============================ */
+
+hugBtn.onclick=function(){
+
+screen5.classList.add("hidden");
+
+screen6.classList.remove("hidden");
+
+createHearts();
+
+createFlowers();
+
+createStars();
+
+createSparkles();
+
+}
+
+/* ============================
+   FLOWERS
+============================ */
+
+function createFlowers(){
+
+for(let i=0;i<120;i++){
+
+let flower=document.createElement("div");
+
+flower.className="flower";
+
+flower.innerHTML=["🌸","🌹","🌺","🌼","🌷"][Math.floor(Math.random()*5)];
+
+flower.style.left=Math.random()*100+"%";
+
+flower.style.animationDuration=(4+Math.random()*5)+"s";
+
+flower.style.animationDelay=Math.random()*2+"s";
+
+flower.style.fontSize=(20+Math.random()*25)+"px";
+
+flowers.appendChild(flower);
+
+setTimeout(()=>{
+
+flower.remove();
+
+},9000);
+
+}
+
+}
+
+/* ============================
+   STARS
+============================ */
+
+function createStars(){
+
+for(let i=0;i<140;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+star.innerHTML="⭐";
+
+star.style.left=Math.random()*100+"%";
+
+star.style.animationDuration=(3+Math.random()*4)+"s";
+
+star.style.animationDelay=Math.random()*2+"s";
+
+star.style.fontSize=(12+Math.random()*20)+"px";
+
+stars.appendChild(star);
+
+setTimeout(()=>{
+
+star.remove();
+
+},8000);
+
+}
+
+}
